@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="data"
+            type="com.example.thirukuralapp.model.ThirukuralResponse" />
+        <variable
+            name="callback"
+            type="com.example.thirukuralapp.interfaces.OnClickListenerForGettingData"/>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".view.ThirukuralActivity"
+        tools:showIn="@layout/activity_scrolling">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/linear_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/prev_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="start"
+                    android:background="@null"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:onClick="@{() -> callback.prevBtnClick()}"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/next_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:onClick="@{() -> callback.nextBtnClick()}"
+                    />
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/section_tamil_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@{@string/section_tam + data.sect_tam}"
+                android:text="@{@string/section_tam + data.sect_tam}"
+                android:gravity="center_vertical|start"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/chapter_group_tamil_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linear_lay"
+                 />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/chapter_group_tamil_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|start"
+                android:contentDescription="@{@string/chapter_group_tam + data.chapgrp_tam}"
+                android:text="@{@string/chapter_group_tam + data.chapgrp_tam}"
+                app:layout_constraintBottom_toTopOf="@id/chapter_tamil_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/section_tamil_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/chapter_tamil_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@{@string/chapter_tam + data.chap_tam}"
+                android:text="@{@string/chapter_tam + data.chap_tam}"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@id/line_one_tamil_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chapter_group_tamil_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/line_one_tamil_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@{@string/kural_tam + data.line1 + `\n` +data.line2}"
+                android:text="@{@string/kural_tam + data.line1 + `\n` +data.line2}"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@id/tamil_explanation_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chapter_tamil_tv" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tamil_explanation_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="8dp"
+                android:contentDescription="@{@string/explanation_tam + data.tam_exp}"
+                android:text="@{@string/explanation_tam + data.tam_exp}"
+                android:minLines="5"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line_one_tamil_tv" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/material_view_margin"
+                android:layout_marginVertical="10dp"
+                android:background="@color/black"
+                app:layout_constraintBottom_toTopOf="@id/section_english_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tamil_explanation_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/section_english_tv"
+                style="@style/HeaderTextTheme"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@{@string/section + data.sect_eng}"
+                android:text="@{@string/section + data.sect_eng}"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@id/chapter_group_english_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/chapter_group_english_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@{@string/chapter_group + data.chapgrp_eng}"
+                android:text="@{@string/chapter_group + data.chapgrp_eng}"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@id/chapter_english_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/section_english_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/chapter_english_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@{@string/chapter + data.chap_eng}"
+                android:text="@{@string/chapter + data.chap_eng}"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@id/english_kural_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chapter_group_english_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/english_kural_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@{data.eng}"
+                android:text="@{data.eng}"
+                android:minLines="2"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@id/english_explanation_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chapter_english_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/english_explanation_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="8dp"
+                android:contentDescription="@{@string/explanation + data.eng_exp}"
+                android:text="@{@string/explanation + data.eng_exp}"
+                android:minLines="5"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@+id/input_no_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/english_kural_tv" />
+
+
+            <View
+                android:id="@+id/input_no_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/material_view_margin"
+                android:background="@color/black"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintBottom_toTopOf="@id/input_no_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/english_explanation_tv"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_no_tv"
+                style="@style/HeaderTextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint"
+                android:maxLength="4"
+                android:gravity="center_vertical|start"
+                app:layout_constraintBottom_toTopOf="@+id/submit_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_no_view" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit_text"
+                android:layout_marginHorizontal="40dp"
+                android:background="@color/black"
+                android:contentDescription="@string/submit_text"
+                android:gravity="center"
+                android:onClick="@{() -> callback.getParticularThiruKural()}"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_no_view"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+</layout>
